@@ -1,12 +1,12 @@
-3feb409e5cb1ad4736310c8489a2ca73 *DESCRIPTION
+5a876b3322d9ac1ddaed176fbf9ec8b4 *DESCRIPTION
 f86f5aa2459441b2253cca660fade9d7 *NAMESPACE
 1dceee84c3640cabd59d4ad860238f25 *R/anolis.R
 9afd203edd316e0e66f0eff2ee175078 *R/detectCharacterType.R
 027422bd4a0eccfec40a4afeebb824ee *R/plotting_functions.R
 2d36685f71da2420679fb7e993f617dc *R/treeplyr-package.R
-0edbb7111ca1bfa396371a5bad8eee8e *R/treeplyr_functions.R
+271ac23c7cd59ecf89db704287623709 *R/treeplyr_functions.R
 80358bde00784a08529bf9a3aca1a903 *data/anolis.rda
-46a0bdef887fb78b0fa46de0130ce2b3 *inst/tests/test-treedata.R
+b109955d7ac86de011e41f994b692cbc *inst/tests/test-treedata.R
 f63dc03c7f4a153ae1cc59a8d2638a7f *inst/tests/test-treeplyr.R
 a548be800e886293a0bea9de06cdea66 *man/anolis.Rd
 2efc7221a0d649f6cedd9c46d08b2823 *man/detectAllCharacters.Rd
