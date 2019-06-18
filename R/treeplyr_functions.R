@@ -103,6 +103,30 @@ mutate_.treedata <- function(.data, ..., .dots){
   return(.data)
 }
 
+#' Choose rows by their ordinal position in the tbl for an object of class \code{treedata}
+#' 
+#' This function can be used to drop tips from tree and data; see \code{\link{slice}}.
+#' 
+#' @param .data An object of class \code{treedata}
+#' @param ... Integer row values
+#' @param .dots Pair/values of expressions coercible to lazy objects.
+#' @return An object of class \code{treedata}. 
+#' @seealso \code{\link{slice}}
+#' @examples
+#' data(anolis)
+#' td <- make.treedata(anolis$phy, anolis$dat)
+#' tdslice <- slice(td, 1:5)
+#' tdslice
+#' @export
+slice_.treedata <- function(.data, ..., .dots){
+  dots <- lazyeval::all_dots(.dots, ..., all_named=TRUE)
+  .data$dat$labelTEMP0123 <- .data$phy$tip.label
+  dat <- slice_(.data$dat, .dots = dots)
+  #row.names(dat) <- attributes(.data)$tip.label
+  .data <- make.treedata(.data$phy, dat)
+  return(.data)
+}
+
 
 #' Function for selecting columns from an object of class \code{treedata}
 #' 
@@ -254,9 +278,10 @@ summarise.grouped_treedata <- function(.data, ...){
   dots <- quos(...)
   #lazyeval::all_dots(.dots, ..., all_named = TRUE)
   nind <- (1:nrow(.data$dat))
-  group_levels <- attributes(.data$dat)$labels[[1]]
-  group_by_var <- colnames(attributes(.data$dat)$labels)[1]
-  phys <- lapply(attributes(.data$dat)$indices, function(x) drop.tip(.data$phy, nind[!(nind %in% (x+1))]))
+  group_levels <- group_data(.data$dat)[[1]]
+  group_by_var <- group_vars(.data$dat)
+  group_index <- group_indices(.data$dat)
+  phys <- lapply(group_levels, function(x) drop.tip(.data$phy, which(!(group_index %in% as.numeric(x)))))
   dat <- as.data.frame(.data$dat)
   rownames(dat) <- attributes(.data)$tip.label
   dats <- lapply(phys, function(x) make.treedata(x, dat)$dat)
@@ -265,7 +290,7 @@ summarise.grouped_treedata <- function(.data, ...){
                                                       e$dat <- dats[[x]];
                                                       e})
   OUT <- NULL
-  for(i in 1:length(envs)){
+  for(i in seq_along(envs)){
     edots <- dots
     for(j in 1:length(edots)){
       attributes(edots[[j]])$.Environment <- envs[[i]]
@@ -642,6 +667,7 @@ filter_.grouped_treedata <- function(.data, ..., .dots){
 #'                    meanSVL = mean(SVL))
 #' @export
 paint_clades <- function(tdObject, nclades=1, name="clades", interactive=TRUE, type="nodes", ids=NULL, plot=TRUE){
+  tdObject <- reorder(tdObject, "postorder")
   if(interactive){
     regimes <- .identifyBranches(tdObject$phy, nclades)
     cat("branches ", paste(regimes$sb, collapse=", "), "selected\n")
@@ -742,6 +768,7 @@ ungroup.grouped_treedata <- function(x, ...){
 }
 
 #' .check_names_df function from tibble package
+#' @keywords internal
 .check_names_df <- function(x,j){
   if (is.character(j) && any(wrong <- !j %in% names(x))) {
     names <- j[wrong]
@@ -750,6 +777,7 @@ ungroup.grouped_treedata <- function(x, ...){
 }
 
 #' as_data_frame.data.frame function from the tibble package
+#' @keywords internal
 .as_data_frame.data.frame <- function (x, ...) 
 {
   class(x) <- c("tbl_df", "tbl", "data.frame")
