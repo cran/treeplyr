@@ -1,8 +1,8 @@
 Package: treeplyr
 Type: Package
 Title: 'dplyr' Functionality for Matched Tree and Data Objects
-Version: 0.1.6
-Date: 2019-06-18
+Version: 0.1.7
+Date: 2019-07-22
 Author: Josef Uyeda
 Maintainer: Josef Uyeda <josef.uyeda@gmail.com>
 Description: Matches phylogenetic trees and trait data, and
@@ -15,6 +15,6 @@ URL: https://github.com/uyedaj/treeplyr
 BugReports: https://github.com/uyedaj/treeplyr/issues
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-06-18 19:20:42 UTC; juyeda
+Packaged: 2019-07-22 15:25:38 UTC; juyeda
 Repository: CRAN
-Date/Publication: 2019-06-18 21:50:03 UTC
+Date/Publication: 2019-07-25 22:50:02 UTC

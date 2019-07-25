@@ -1,8 +1,8 @@
-c4166a50cb5e963b3218722b70f3c574 *DESCRIPTION
+8a11a4a9404a4843a8feda03851f986e *DESCRIPTION
 26da11f8c0d7e08ce21fd8941723afa4 *NAMESPACE
 1dceee84c3640cabd59d4ad860238f25 *R/anolis.R
 9afd203edd316e0e66f0eff2ee175078 *R/detectCharacterType.R
-42a73c3e66d76bbad77f876b329a933c *R/plotting_functions.R
+bc818523d869a3817f272e3c5e1eb2f3 *R/plotting_functions.R
 2d36685f71da2420679fb7e993f617dc *R/treeplyr-package.R
 9791349b85bb86d0aeddb97eb83743f4 *R/treeplyr_functions.R
 80358bde00784a08529bf9a3aca1a903 *data/anolis.rda
@@ -40,5 +40,5 @@ b402ba1819242f35b463e25be28ffb87 *man/tdapply.Rd
 32607baab047c0809560c657d01e0bfa *man/treedply.treedata.Rd
 aaf50d0e05e8dfe99fb2e36a73a22d3e *man/treeply.treedata.Rd
 05376445157adc29d03befa09f9d570a *man/treeplyr.Rd
-7a3746d97192c9841c808ed93666d31e *src/init.c
+60b8549d3daf2ebdad84a4f5f55e2e92 *src/init.c
 e99b5ab2ba10ced6023f438164502e05 *src/prep_branches.cpp
