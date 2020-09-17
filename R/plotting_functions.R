@@ -63,7 +63,8 @@
 #' Internal function taken from bayou
 #' @keywords internal
 .identifyBranches <- function(tree, n, fixed.loc=TRUE, plot.simmap=TRUE){
-  mar.old <- par('mar')
+  oldpar <- par(no.readonly = TRUE)    # code line i
+  on.exit(par(oldpar))       
   par(mfrow=c(1,1), mar=c(0.1,0.1,0.1,0.1))
   tree <- reorder(tree,"postorder")
   plot(tree, cex=0.5)
@@ -92,7 +93,6 @@
     L <- get("last_plot.phylo", envir = .PlotPhyloEnv)
     legend(min(L$xx), max(L$yy), legend=names(cols), lwd=3, col=cols)
   }
-  par(mar=mar.old)
   out <- list(sb=sb)
   if(fixed.loc) out$loc <- loc
   return(out)
@@ -264,25 +264,6 @@
                                                                  y), y = t$edge[, 2])
   else o <- 1:nrow(t$edge)
   return(X[o, ])
-}
-
-## Functions taken from dplyr
-group_by_prepare <- function (.data, ..., .dots, add = FALSE) {
-  new_groups <- lazyeval::all_dots(.dots, ...)
-  is_name <- vapply(new_groups, function(x) is.name(x$expr), 
-                    logical(1))
-  has_name <- names2(new_groups) != ""
-  needs_mutate <- has_name | !is_name
-  if (any(needs_mutate)) {
-    .data <- mutate_(.data, .dots = new_groups[needs_mutate])
-  }
-  new_groups <- lazyeval::auto_name(new_groups)
-  groups <- lapply(names(new_groups), as.name)
-  if (add) {
-    groups <- c(groups(.data), groups)
-  }
-  groups <- groups[!duplicated(groups)]
-  list(data = .data, groups = groups)
 }
 
 names2 <- function (x) {
